@@ -1,0 +1,37 @@
+#include <msp430.h> 
+
+/*
+ * main.c
+ */
+int main(void) {
+    WDTCTL = WDTPW | WDTHOLD;	// Stop watchdog timer
+	
+    // 配置DCO为1MHZ
+    DCOCTL = CALDCO_1MHZ;
+    BCSCTL1 = CALBC1_1MHZ;
+    // 配置SMCLK的时钟源为DCO
+    BCSCTL2 &= ~SELS;
+    // SMCLK的分频系数
+    BCSCTL2 &= ~(DIVS0 | DIVS1);
+
+    // 复位USCI_Ax
+    UCA0CTL1 |= UCSWRST;
+
+    // 选择USCI_Ax为UART模式
+    UCA0CTL0 &= ~UCSYNC;
+
+    // 配置UART时钟源为SMCLK
+    UCA0CTL1 |= UCSSEL1;
+
+    // 设置波特率为9600MHZ
+    UCA0BR0 = 0x68;
+    UCA0BR1 = 0x00;
+    UCA0MCTL = 1 << 1;
+    P1SEL |= BIT1 + BIT2;
+    P1SEL2 |= BIT1 + BIT2;
+
+
+
+
+    return 0;
+}

@@ -1,0 +1,19 @@
+#include <msp430.h> 
+
+/*
+ * main.c
+ */
+int main(void) {
+    WDTCTL = WDTPW | WDTHOLD;	// Stop watchdog timer
+	
+    // 配置DCO为1MHZ
+    DCOCTL = CALDCO_1MHZ;
+    BCSCTL1 = CALBC1_1MHZ;
+    // 配置SMCLK的时钟源为DCO
+    BCSCTL2 &= ~SELS;
+    // SMCLK的分频系数
+    BCSCTL2 &= ~(DIVS0 | DIVS1);
+
+
+    return 0;
+}

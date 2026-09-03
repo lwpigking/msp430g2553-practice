@@ -1,0 +1,15 @@
+#include <msp430.h> 
+
+/*
+ * main.c
+ */
+int main(void) {
+    WDTCTL = WDTPW | WDTHOLD;	// Stop watchdog timer
+    // PxDIR 00000000 0->输入, 1->输出
+    // 00000001 -> P1.0为输出状态
+    P1DIR |= BIT0;
+    // PxOUT
+	P1OUT |= BIT0;
+
+	return 0;
+}

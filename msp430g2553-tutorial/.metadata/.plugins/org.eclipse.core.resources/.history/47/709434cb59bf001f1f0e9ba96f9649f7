@@ -1,0 +1,42 @@
+#include <msp430.h> 
+
+/*
+ * main.c
+ */
+int main(void) {
+    WDTCTL = WDTPW | WDTHOLD;	// Stop watchdog timer
+	unsigned int cnt = 0;
+
+	// 初始化时钟
+	DCOCTL = CALDCO_1MHZ;
+	BCSCTL1 = CALBC1_1MHZ;
+	P1DIR &= ~BIT6;
+
+	// 时钟源为SMCLK
+	TA1CTL |= TASSEL_2;
+	// 工作模式
+	TA1CTL |= MC0|MC1;
+	// TACCR0和TACCR2比较
+	// 占空比：(TACCR0-TACCR2) / TACCR0
+	// 修改TACCR2的值就能修改占空比的变化
+	TA1CCR0 = 0x00FF;
+	TA1CCR2 = 0x00FF;
+
+	// 设置比较模式
+	TA1CCTL0 &= ~CAP;
+	TA1CCTL2 &= ~CAP;
+	// 设置比较输出模式
+	TA1CCTL2 |= OUTMOD_6;
+
+	// 设置IO服用
+	P2SEL |= BIT5;
+	P2DIR |= BIT5;
+
+	while(1) {
+		for (cnt = 0; cnt < 0x00FF; cnt++) {
+
+		}
+	}
+	
+	return 0;
+}

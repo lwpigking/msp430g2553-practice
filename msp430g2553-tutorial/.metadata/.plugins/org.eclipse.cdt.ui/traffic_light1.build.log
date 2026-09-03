@@ -1,0 +1,119 @@
+
+**** Build of configuration Debug for project traffic_light1 ****
+
+"C:\\ti\\ccsv5\\utils\\bin\\gmake" -k all 
+'Building file: ../main.c'
+'Invoking: MSP430 Compiler'
+"C:/ti/ccsv5/tools/compiler/msp430_4.2.1/bin/cl430" -vmsp --abi=eabi --include_path="C:/ti/ccsv5/ccs_base/msp430/include" --include_path="C:/Users/LENOVO/Desktop/traffic_light1/src" --include_path="C:/ti/ccsv5/tools/compiler/msp430_4.2.1/include" --advice:power=all -g --define=__MSP430G2553__ --diag_warning=225 --display_error_number --diag_wrap=off --printf_support=minimal --preproc_with_compile --preproc_dependency="main.pp"  "../main.c"
+"../main.c", line 197: remark #1530-D: (ULP 5.1) Detected modulo operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+"../main.c", line 198: remark #1530-D: (ULP 5.1) Detected divide operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+"../main.c", line 199: remark #1530-D: (ULP 5.1) Detected modulo operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+"../main.c", line 200: remark #1530-D: (ULP 5.1) Detected divide operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+"../main.c", line 322: remark #1530-D: (ULP 5.1) Detected modulo operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+"../main.c", line 323: remark #1530-D: (ULP 5.1) Detected divide operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+"../main.c", line 324: remark #1530-D: (ULP 5.1) Detected modulo operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+"../main.c", line 325: remark #1530-D: (ULP 5.1) Detected divide operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+"../main.c", line 345: warning #225-D: function "TCA6416_Tx_Frame" declared implicitly
+"../main.c", line 342: remark #1535-D: (ULP 8.1) variable "con" is used as a constant. Recommend declaring variable as either 'static const' or 'const'
+"../main.c", line 32: remark #1535-D: (ULP 8.1) variable "dis_buf" is used as a constant. Recommend declaring variable as either 'static const' or 'const'
+"../main.c", line 50: remark #1535-D: (ULP 8.1) variable "c" is used as a constant. Recommend declaring variable as either 'static const' or 'const'
+"../main.c", line 52: remark #1535-D: (ULP 8.1) variable "yellow" is used as a constant. Recommend declaring variable as either 'static const' or 'const'
+'Finished building: ../main.c'
+' '
+'Building file: ../src/BCSplus_init.c'
+'Invoking: MSP430 Compiler'
+"C:/ti/ccsv5/tools/compiler/msp430_4.2.1/bin/cl430" -vmsp --abi=eabi --include_path="C:/ti/ccsv5/ccs_base/msp430/include" --include_path="C:/Users/LENOVO/Desktop/traffic_light1/src" --include_path="C:/ti/ccsv5/tools/compiler/msp430_4.2.1/include" --advice:power=all -g --define=__MSP430G2553__ --diag_warning=225 --display_error_number --diag_wrap=off --printf_support=minimal --preproc_with_compile --preproc_dependency="src/BCSplus_init.pp" --obj_directory="src"  "../src/BCSplus_init.c"
+"../src/BCSplus_init.c", line 52: remark #1527-D: (ULP 2.1) Detected SW delay loop using __delay_cycles. Recommend using a timer module instead
+'Finished building: ../src/BCSplus_init.c'
+' '
+'Building file: ../src/HT1621.c'
+'Invoking: MSP430 Compiler'
+"C:/ti/ccsv5/tools/compiler/msp430_4.2.1/bin/cl430" -vmsp --abi=eabi --include_path="C:/ti/ccsv5/ccs_base/msp430/include" --include_path="C:/Users/LENOVO/Desktop/traffic_light1/src" --include_path="C:/ti/ccsv5/tools/compiler/msp430_4.2.1/include" --advice:power=all -g --define=__MSP430G2553__ --diag_warning=225 --display_error_number --diag_wrap=off --printf_support=minimal --preproc_with_compile --preproc_dependency="src/HT1621.pp" --obj_directory="src"  "../src/HT1621.c"
+"../src/HT1621.c", line 68: remark #1544-D: (ULP 13.1) Detected loop counting up. Recommend loops count down as detecting zeros is easier
+"../src/HT1621.c", line 75: remark #1544-D: (ULP 13.1) Detected loop counting up. Recommend loops count down as detecting zeros is easier
+"../src/HT1621.c", line 84: remark #1544-D: (ULP 13.1) Detected loop counting up. Recommend loops count down as detecting zeros is easier
+"../src/HT1621.c", line 93: remark #1544-D: (ULP 13.1) Detected loop counting up. Recommend loops count down as detecting zeros is easier
+"../src/HT1621.c", line 114: remark #1544-D: (ULP 13.1) Detected loop counting up. Recommend loops count down as detecting zeros is easier
+"../src/HT1621.c", line 119: remark #1544-D: (ULP 13.1) Detected loop counting up. Recommend loops count down as detecting zeros is easier
+"../src/HT1621.c", line 124: remark #1544-D: (ULP 13.1) Detected loop counting up. Recommend loops count down as detecting zeros is easier
+"../src/HT1621.c", line 127: remark #1544-D: (ULP 13.1) Detected loop counting up. Recommend loops count down as detecting zeros is easier
+"../src/HT1621.c", line 152: remark #1544-D: (ULP 13.1) Detected loop counting up. Recommend loops count down as detecting zeros is easier
+"../src/HT1621.c", line 157: remark #1544-D: (ULP 13.1) Detected loop counting up. Recommend loops count down as detecting zeros is easier
+"../src/HT1621.c", line 163: remark #1544-D: (ULP 13.1) Detected loop counting up. Recommend loops count down as detecting zeros is easier
+'Finished building: ../src/HT1621.c'
+' '
+'Building file: ../src/I2C.c'
+'Invoking: MSP430 Compiler'
+"C:/ti/ccsv5/tools/compiler/msp430_4.2.1/bin/cl430" -vmsp --abi=eabi --include_path="C:/ti/ccsv5/ccs_base/msp430/include" --include_path="C:/Users/LENOVO/Desktop/traffic_light1/src" --include_path="C:/ti/ccsv5/tools/compiler/msp430_4.2.1/include" --advice:power=all -g --define=__MSP430G2553__ --diag_warning=225 --display_error_number --diag_wrap=off --printf_support=minimal --preproc_with_compile --preproc_dependency="src/I2C.pp" --obj_directory="src"  "../src/I2C.c"
+"../src/I2C.c", line 277: remark #1544-D: (ULP 13.1) Detected loop counting up. Recommend loops count down as detecting zeros is easier
+"../src/I2C.c", line 282: remark #1540-D: (ULP 11.2) Assignment of higher bits (constants) to "P1DIR" within a loop. Recommend using lower 4 bits to allow use of constant generators
+"../src/I2C.c", line 285: remark #1540-D: (ULP 11.2) Assignment of higher bits (constants) to "P1DIR" within a loop. Recommend using lower 4 bits to allow use of constant generators
+"../src/I2C.c", line 326: remark #1544-D: (ULP 13.1) Detected loop counting up. Recommend loops count down as detecting zeros is easier
+"../src/I2C.c", line 334: remark #1540-D: (ULP 11.2) Assignment of higher bits (constants) to "P1DIR" within a loop. Recommend using lower 4 bits to allow use of constant generators
+"../src/I2C.c", line 354: remark #1544-D: (ULP 13.1) Detected loop counting up. Recommend loops count down as detecting zeros is easier
+"../src/I2C.c", line 362: remark #1540-D: (ULP 11.2) Assignment of higher bits (constants) to "P1DIR" within a loop. Recommend using lower 4 bits to allow use of constant generators
+"../src/I2C.c", line 381: remark #1544-D: (ULP 13.1) Detected loop counting up. Recommend loops count down as detecting zeros is easier
+"../src/I2C.c", line 404: remark #1544-D: (ULP 13.1) Detected loop counting up. Recommend loops count down as detecting zeros is easier
+"../src/I2C.c", line 423: warning #179-D: variable "i" was declared but never referenced
+"../src/I2C.c", line 423: remark #1535-D: (ULP 8.1) variable "i" is used as a constant. Recommend declaring variable as either 'static const' or 'const'
+'Finished building: ../src/I2C.c'
+' '
+'Building file: ../src/LCD_128.c'
+'Invoking: MSP430 Compiler'
+"C:/ti/ccsv5/tools/compiler/msp430_4.2.1/bin/cl430" -vmsp --abi=eabi --include_path="C:/ti/ccsv5/ccs_base/msp430/include" --include_path="C:/Users/LENOVO/Desktop/traffic_light1/src" --include_path="C:/ti/ccsv5/tools/compiler/msp430_4.2.1/include" --advice:power=all -g --define=__MSP430G2553__ --diag_warning=225 --display_error_number --diag_wrap=off --printf_support=minimal --preproc_with_compile --preproc_dependency="src/LCD_128.pp" --obj_directory="src"  "../src/LCD_128.c"
+"../src/LCD_128.c", line 21: remark #1544-D: (ULP 13.1) Detected loop counting up. Recommend loops count down as detecting zeros is easier
+"../src/LCD_128.c", line 31: remark #2553-D: (ULP 14.1) Array index (involving "SegNum") of type "int". Recommend using "unsigned int"
+"../src/LCD_128.c", line 31: remark #1530-D: (ULP 5.1) Detected divide operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+"../src/LCD_128.c", line 41: remark #2553-D: (ULP 14.1) Array index (involving "SegNum") of type "int". Recommend using "unsigned int"
+"../src/LCD_128.c", line 41: remark #1530-D: (ULP 5.1) Detected divide operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+"../src/LCD_128.c", line 266: remark #1544-D: (ULP 13.1) Detected loop counting up. Recommend loops count down as detecting zeros is easier
+"../src/LCD_128.c", line 268: remark #1530-D: (ULP 5.1) Detected modulo operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+"../src/LCD_128.c", line 269: remark #1530-D: (ULP 5.1) Detected divide operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+"../src/LCD_128.c", line 276: remark #1544-D: (ULP 13.1) Detected loop counting up. Recommend loops count down as detecting zeros is easier
+"../src/LCD_128.c", line 258: remark #1535-D: (ULP 8.1) variable "DispBuff" is used as a constant. Recommend declaring variable as either 'static const' or 'const'
+"../src/LCD_128.c", line 11: remark #1535-D: (ULP 8.1) variable "LCD_Buffer" is used as a constant. Recommend declaring variable as either 'static const' or 'const'
+'Finished building: ../src/LCD_128.c'
+' '
+'Building file: ../src/TCA6416A.c'
+'Invoking: MSP430 Compiler'
+"C:/ti/ccsv5/tools/compiler/msp430_4.2.1/bin/cl430" -vmsp --abi=eabi --include_path="C:/ti/ccsv5/ccs_base/msp430/include" --include_path="C:/Users/LENOVO/Desktop/traffic_light1/src" --include_path="C:/ti/ccsv5/tools/compiler/msp430_4.2.1/include" --advice:power=all -g --define=__MSP430G2553__ --diag_warning=225 --display_error_number --diag_wrap=off --printf_support=minimal --preproc_with_compile --preproc_dependency="src/TCA6416A.pp" --obj_directory="src"  "../src/TCA6416A.c"
+"../src/TCA6416A.c", line 64: warning #225-D: function "I2C_RxFrame1" declared implicitly
+"../src/TCA6416A.c", line 78: remark #1527-D: (ULP 2.1) Detected SW delay loop using __delay_cycles. Recommend using a timer module instead
+"../src/TCA6416A.c", line 77: remark #1535-D: (ULP 8.1) variable "conf" is used as a constant. Recommend declaring variable as either 'static const' or 'const'
+"../src/TCA6416A.c", line 128: remark #1530-D: (ULP 5.1) Detected modulo operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+"../src/TCA6416A.c", line 130: remark #1530-D: (ULP 5.1) Detected modulo operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+"../src/TCA6416A.c", line 112: remark #1535-D: (ULP 8.1) variable "out0_7" is used as a constant. Recommend declaring variable as either 'static const' or 'const'
+"../src/TCA6416A.c", line 113: remark #1535-D: (ULP 8.1) variable "out10_17" is used as a constant. Recommend declaring variable as either 'static const' or 'const'
+"../src/TCA6416A.c", line 151: remark #1535-D: (ULP 8.1) variable "temp" is used as a constant. Recommend declaring variable as either 'static const' or 'const'
+"../src/TCA6416A.c", line 152: remark #1535-D: (ULP 8.1) variable "conf" is used as a constant. Recommend declaring variable as either 'static const' or 'const'
+'Finished building: ../src/TCA6416A.c'
+' '
+'Building target: traffic_light1.out'
+'Invoking: MSP430 Linker'
+"C:/ti/ccsv5/tools/compiler/msp430_4.2.1/bin/cl430" -vmsp --abi=eabi --advice:power=all -g --define=__MSP430G2553__ --diag_warning=225 --display_error_number --diag_wrap=off --printf_support=minimal -z -m"traffic_light1.map" --heap_size=80 --stack_size=80 -i"C:/ti/ccsv5/ccs_base/msp430/include" -i"C:/ti/ccsv5/tools/compiler/msp430_4.2.1/lib" -i"C:/ti/ccsv5/tools/compiler/msp430_4.2.1/include" --reread_libs --warn_sections --display_error_number --diag_wrap=off --xml_link_info="traffic_light1_linkInfo.xml" --rom_model -o "traffic_light1.out"  "./src/TCA6416A.obj" "./src/LCD_128.obj" "./src/I2C.obj" "./src/HT1621.obj" "./src/BCSplus_init.obj" "./main.obj" "../lnk_msp430g2553.cmd" -l"libc.a" 
+<Linking>
+remark #10372-D: (ULP 4.1) Detected uninitialized Port 2 in this project. Recommend initializing all unused ports to eliminate wasted current consumption on unused pins.
+remark #10372-D: (ULP 4.1) Detected uninitialized Port 3 in this project. Recommend initializing all unused ports to eliminate wasted current consumption on unused pins.
+'Finished building target: traffic_light1.out'
+' '
+'Create flash image: Intel-HEX'
+"C:/ti/ccsv5/tools/compiler/msp430_4.2.1/bin/hex430" -i "traffic_light1.out" -o "traffic_light1.hex" -order MS -romwidth 16
+Translating to Intel format...
+   "traffic_light1.out"   ==> .text
+   "traffic_light1.out"   ==> .cinit
+   "traffic_light1.out"   ==> PORT1
+   "traffic_light1.out"   ==> PORT2
+   "traffic_light1.out"   ==> ADC10
+   "traffic_light1.out"   ==> USCIAB0TX
+   "traffic_light1.out"   ==> USCIAB0RX
+   "traffic_light1.out"   ==> TIMER0_A1
+   "traffic_light1.out"   ==> TIMER0_A0
+   "traffic_light1.out"   ==> WDT
+   "traffic_light1.out"   ==> COMPARATORA
+   "traffic_light1.out"   ==> TIMER1_A1
+   "traffic_light1.out"   ==> TIMER1_A0
+   "traffic_light1.out"   ==> NMI
+   "traffic_light1.out"   ==> .reset
+' '
+
+**** Build Finished ****

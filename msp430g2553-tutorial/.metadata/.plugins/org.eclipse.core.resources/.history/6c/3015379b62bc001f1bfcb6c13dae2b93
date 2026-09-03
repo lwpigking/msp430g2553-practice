@@ -1,0 +1,18 @@
+#include <msp430.h> 
+
+/*
+ * main.c
+ */
+int main(void) {
+    WDTCTL = WDTPW | WDTHOLD;	// Stop watchdog timer
+    // PxDIR 00000000 0->输入, 1->输出
+    // 00000001 -> P1.0为输出状态
+    P1DIR |= BIT0;
+    // P1DIR &= ~BIT0; BIT0设置为输出状态
+    // PxOUT作为输出端口使用 1为高电平，0为低电平
+    // PxIN作为输入端口使用
+    // P1IN x1xxxxxx-> P1.6的外设为高电平
+	P1OUT |= BIT0;
+
+	return 0;
+}

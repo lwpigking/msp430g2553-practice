@@ -1,0 +1,24 @@
+#include <msp430.h> 
+
+/*
+ * main.c
+ */
+int main(void) {
+    WDTCTL = WDTPW | WDTHOLD;	// Stop watchdog timer
+	P1DIR |= BIT6;
+	P1OUT &= ~BIR6;
+
+	// 初始化按键所在IO口P1.3为输入
+	P1DIR &= ~BIT3;
+
+	while(1) {
+		// 如果P1.3为高电平，证明按键没被按下
+		if (P1IN & BIT3) {
+			P1OUT &= ~BIT6;
+		} else {
+			P1OUT |= BIT6;
+		}
+	}
+
+	return 0;
+}

@@ -1,0 +1,85 @@
+#include <msp430.h> 
+#include <stdint.h>
+
+uint32_t currenttime = 40500;
+
+/**
+ * 初始化系统时钟
+ */
+void InitSystemClock(void) {
+	// 配置DCO为1MHZ
+	DCOCTL = CALDCO_1MHZ;
+    BCSCTL1 = CALBC1_1MHZ;
+    // 配置SMCLK的时钟源为DCO
+    BCSCTL2 &= ~SELS;
+    // SMCLK的分频系数
+    BCSCTL2 &= ~(DIVS0 | DIVS1);
+}
+
+/**
+ * 初始化串口
+ */
+void InitUART(void) {
+	// 复位USCI_Ax
+	UCA0CTL1 |= UCSWRST;
+	// 选择USCI_Ax为UART模式
+    UCA0CTL0 &= ~UCSYNC;
+
+    // 配置UART时钟源为SMCLK
+    UCA0CTL1 |= UCSSEL1;
+
+    // 设置波特率为9600MHZ
+    UCA0BR0 = 0x68;
+    UCA0BR1 = 0x00;
+    UCA0MCTL = 1 << 1;
+
+    // 使能端口复用
+    P1SEL |= BIT1 + BIT2;
+    P1SEL2 |= BIT1 + BIT2;
+    // 清除复位，使能UART
+    UCA0CTL1 &= ~UCSWRST;
+}
+
+int main(void) {
+    WDTCTL = WDTPW | WDTHOLD;	// Stop watchdog timer
+	InitSystemClock();
+	InitUart();
+	P1DIR |= BIT6;
+
+	TA1CTL |= TASSEL_2;
+	TA1CTL |= MC_1;
+	TA1CCRO = 49999;
+
+	// 开启TAIFG中断
+	TA1CTL |= TAIE;
+	__bis_SR_register(GIE);
+
+	while(1) {
+		if (flag == 1) {
+			flag = 0;
+			P1OUT ^= BIT6;
+//			PrintTime(currenttime);
+		}
+	}
+	
+	return 0;
+}
+
+#pragma vector = TIMER1_A1_VECTOR
+__interrupt void Time_Tick(void) {
+	static uint8_t cnt = 0;
+	switch(TA1IV) {
+	case 0x02: break;
+	case 0x04: break;
+	case 0x0A:
+		cnt++;
+		if(cnt == 20) {
+			cnt = 0;
+			flag = 1;
+			currenttime++;
+			currenttime %= 86400;
+		}
+		break;
+	default: break;
+	}
+}

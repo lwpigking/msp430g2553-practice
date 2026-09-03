@@ -1,0 +1,234 @@
+#include <msp430.h> 
+#include "TCA6416A.h"
+#include "LCD_128.h"
+#include"HT1621.h"
+
+void WDT_init();
+//检测事件确实发生了
+void I2C_IODect();
+void P1_IODect();
+void GPIO_init();
+
+int counter=0;
+/**
+ * 8. 编程实现对P2.4的下降沿捕获，用LED亮灭观察捕获情况。
+ * 9. 编程实现扩展板上的key1-key4键点动控制扩展板上的LED1-LED4灯，按下时灭，释放时亮。
+ * 10. 利用I2C扩展IO单元的按键，编程实现4个键的按键显示功能。上电时清LCD，按下Key1-Key4键时可在第六个大字符显示位置按键数字，释放时清显示数字。
+ * 11. 编程实现用P1.3键实现0-9的循环按键计数功能，按一次计数器加一，并在LCD上显示。
+ */
+
+int main(void) {
+	// 八、
+    /*WDTCTL = WDTPW | WDTHOLD;	// Stop watchdog timer
+   	//-----初始化TA1为SMCLK 输入，连续模式，通道1停止，通道2捕获(P2.4)-----
+   	P2SEL |= BIT4;
+    P2DIR &= ~BIT4;                                           //SET P2.4 capture input
+    P2REN |= BIT4;
+    P2OUT |= BIT4;
+    TA1CTL = TASSEL_2 + MC_2 + TACLR;
+    TA1CCTL2 = CM_2 + CCIS_0 + CAP + SCS + CCIE;              //下降沿捕获
+   	TA1CCTL2 &= ~COV;
+   	P1DIR |= BIT0;                                            //set P1.0 output
+   	_bis_SR_register(LPM0_bits+GIE);
+   	return 0;*/
+
+	// 九、
+	WDTCTL = WDTPW + WDTHOLD;	//关狗
+	    BCSCTL1 = CALBC1_12MHZ;       Set DCO to 12MHz
+	    DCOCTL = CALDCO_12MHZ;
+	    TCA6416A_Init();			// 初始化IO扩展口
+	//----提示初始化成功----
+	    //	PinOUT(0,1);           // 指定输出为1，灯灭
+	    //	PinOUT(1,1);
+	    //	PinOUT(2,1);
+	    //	PinOUT(3,1);
+	    //	PinOUT(4,1);
+	    //	PinOUT(5,1);
+	    //	PinOUT(6,1);
+	    //	PinOUT(7,1);
+		WDT_init();
+		while(1)
+		{
+			PinIN();
+			I2C_IODect();
+			_bis_SR_register(LPM0_bits);
+		}
+
+	// 十、
+//	WDTCTL = WDTPW + WDTHOLD;	 //关狗
+//	    BCSCTL1 = CALBC1_12MHZ;      //Set DCO to 12MHz
+//	    DCOCTL = CALDCO_12MHZ;
+//	    TCA6416A_Init();			// 初始化IO扩展口
+//	    HT1621_init();
+	//----提示初始化成功----
+//		PinOUT(0,1);           // 指定0号管脚输出为1
+//		PinOUT(1,1);           // 指定1号管脚输出为0
+//		PinOUT(2,1);           // 指定2号管脚输出为1
+//		PinOUT(3,1);           // 指定3号管脚输出为0
+//		PinOUT(4,1);           // 指定4号管脚输出为1
+//		PinOUT(5,1);           // 指定5号管脚输出为0
+//		PinOUT(6,1);           // 指定6号管脚输出为1
+//		PinOUT(7,1);           // 指定7号管脚输出为0
+	//--LCD清零
+//		LCD_DisplayDigit(LCD_DIGIT_CLEAR,1);
+//		LCD_DisplayDigit(LCD_DIGIT_CLEAR,2);
+//		LCD_DisplayDigit(LCD_DIGIT_CLEAR,3);
+//		LCD_DisplayDigit(LCD_DIGIT_CLEAR,4);
+//		LCD_DisplayDigit(LCD_DIGIT_CLEAR,5);
+//		LCD_DisplayDigit(LCD_DIGIT_CLEAR,6);
+		//-----更新缓存，真正显示-----
+		/*HT1621_Reflash(LCD_Buffer);
+		WDT_init();
+		while(1)
+		{
+			PinIN();
+			I2C_IODect();
+			_bis_SR_register(LPM0_bits + GIE);
+		}*/
+
+	    // 十一、
+//	    WDTCTL = WDTPW + WDTHOLD;	//关狗
+//	    	GPIO_init();
+//	    	WDT_init();
+//	    	BCSCTL1 = CALBC1_12MHZ;      //Set DCO to 12MHz
+//	        DCOCTL = CALDCO_12MHZ;
+//	    	TCA6416A_Init();			// 初始化IO扩展口
+//	    	HT1621_init();
+//	    	LCD_DisplayDigit(LCD_DIGIT_CLEAR,1);
+//	    	LCD_DisplayDigit(LCD_DIGIT_CLEAR,2);
+//	    	LCD_DisplayDigit(LCD_DIGIT_CLEAR,3);
+//	    	LCD_DisplayDigit(LCD_DIGIT_CLEAR,4);
+//	    	LCD_DisplayDigit(LCD_DIGIT_CLEAR,5);
+//	    	LCD_DisplayDigit(LCD_DIGIT_CLEAR,6);
+//	    		//-----更新缓存，真正显示-----
+//	    	HT1621_Reflash(LCD_Buffer);
+//	    	_enable_interrupts();							//开总中断
+//	    	_bis_SR_register(LPM3_bits);				//LPM3休眠
+}
+
+//#pragma vector=TIMER1_A1_VECTOR
+//__interrupt void Timer_A1(void)
+//{
+//  int a;
+//  switch(TA1IV)
+//  {
+//  case  TA1IV_TACCR1: break;                      // CCR1 not used
+//  case  TA1IV_TACCR2:                             // CCR2
+//	    a = TA1CCR2;                                 //-----启用中断服务函数-----
+//	    P1OUT ^= BIT0;                            // capture indicate
+//        break;
+//  case TA1IV_TAIFG: break;
+//  default :  break;
+//  }
+//}
+
+/******************************************************************************************************
+ * 名       称：WDT_init()
+ * 功       能：初始化WDT定时中断为16ms
+ * 入口参数：无
+ * 出口参数：无
+ * 说       明：无
+ * 范       例：无
+ ******************************************************************************************************/
+void WDT_init()
+{
+	//-----设定WDT为-----------
+	WDTCTL=WDT_ADLY_16;
+	//-----WDT中断使能----------------------
+    IE1 |= WDTIE;
+}
+/******************************************************************************************************
+ * 名       称：WDT_ISR()
+ * 功       能：WDT定时中断服务
+ * 入口参数：无
+ * 出口参数：无
+ * 说       明：无
+ * 范       例：无
+ ******************************************************************************************************/
+/*#pragma vector=WDT_VECTOR
+__interrupt void WDT_ISR(void)
+{
+  _bic_SR_register_on_exit(LPM0_bits);
+}*/
+/******************************************************************************************************
+ * 名       称： I2C_IODect()
+ * 功       能：TCA6416A的扩展IO事件检测函数
+ * 入口参数：无
+ * 出口参数：无
+ * 说       明：检测具体哪个扩展IO被按下
+ * 范       例：无
+ ******************************************************************************************************/
+void I2C_IODect()			                 //检测事件确实发生了
+{
+	//----判断I2C_IO10所连的KEY1按键是否被按下------
+	if((TCA6416A_InputBuffer&BIT8) == BIT8)
+		PinOUT(0,0);
+	else
+		PinOUT(0,1);
+	//----判断I2C_IO11所连的KEY2按键是否被按下------
+	if((TCA6416A_InputBuffer&BIT9)== BIT9)
+		PinOUT(1,0);
+	else
+		PinOUT(1,1);
+	//----判断I2C_IO12所连的KEY3按键是否被按下------
+	if((TCA6416A_InputBuffer&BITA) == BITA)
+		PinOUT(2,0);
+	else
+		PinOUT(2,1);
+	//----判断I2C_IO13所连的KEY4按键是否被按下------
+	if((TCA6416A_InputBuffer&BITB) ==  BITB)
+		PinOUT(3,0);
+	else
+		PinOUT(3,1);
+}
+//void I2C_IODect()			                 //检测事件确实发生了
+//{
+//	//----判断I2C_IO10所连的KEY1按键是否被按下------
+//	if((TCA6416A_InputBuffer&0x0f00)!=0)
+//		LCD_DisplayDigit(LCD_DIGIT_CLEAR,6);  //没键按下，清LCD
+//	if((TCA6416A_InputBuffer&BIT8) == 0)
+//		LCD_DisplayDigit(1,6);
+//	if((TCA6416A_InputBuffer&BIT9)== 0)
+//		LCD_DisplayDigit(2,6);
+//	if((TCA6416A_InputBuffer&BITA) == 0)
+//		LCD_DisplayDigit(3,6);
+//	if((TCA6416A_InputBuffer&BITB) == 0)
+//		LCD_DisplayDigit(4,6);
+//	HT1621_Reflash(LCD_Buffer);
+//}
+
+//void GPIO_init()
+//{
+//	//-----设定P1.0和P1.3-----
+//	P1DIR &= ~BIT3;    				    //设定P1.3为输出，其它为输入
+//	P1REN |= BIT3;				        //启用P1.3内部上下拉电阻
+//	P1OUT |= BIT3;			            //将电阻设置为上拉
+//
+//}
+//
+//#pragma vector=WDT_VECTOR
+//__interrupt void WDT_ISR(void)
+//{
+//	//-----启用Port1事件检测函数-----
+//	P1_IODect();		//检测通过，则会调用事件处理函数
+//}
+//
+//void P1_IODect()
+//{
+//	static unsigned char KEY_Now=0;	//变量值出函数时需保留
+//	unsigned char KEY_Past=0;
+//	KEY_Past=KEY_Now;
+//	//-----查询IO的输入寄存器-----
+//	if(P1IN&BIT3) 	KEY_Now=1;
+//	else    	    KEY_Now=0;
+//	//-----前一次高电平、后一次低电平，说明按键按下-----
+//	if((KEY_Past==1)&&(KEY_Now==0))
+//		{
+//		  counter++;
+//		  if (counter>=9) counter=0;
+//		  LCD_DisplayDigit(LCD_DIGIT_CLEAR,6);   //没键按下，清LCD
+//		  LCD_DisplayDigit(counter,6);
+//		  HT1621_Reflash(LCD_Buffer);
+//  		}
+//
+//}

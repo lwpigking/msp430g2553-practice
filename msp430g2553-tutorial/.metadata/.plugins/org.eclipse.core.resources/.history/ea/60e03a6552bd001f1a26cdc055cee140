@@ -1,0 +1,35 @@
+#include <msp430.h> 
+
+/*
+ * main.c
+ */
+int main(void) {
+    WDTCTL = WDTPW | WDTHOLD;	// Stop watchdog timer
+
+    uint8_t cnt = 0;
+
+    DCOCTL = CALDCO_16MHZ;
+    BCSCTL1 = CALBC1_16MHZ;
+
+    P1DIR |= BIT6;
+
+    // 设置时钟源为SMCLK
+    TA1CTL |= TASSEL_2;
+    TA1CTL |= MC_1;
+    // 1MHZ要计5万个数
+    // 耗费时间： 1/1MHZ * 50000
+    TA1CCR0 = 49999;
+
+    while(1) {
+    	if(TA1CTL & TAIFG) {
+    		cnt++;
+    		TA1CTL &= ~TAIFG;
+    		if(cnt == 20) {
+    			P1OUT ^= BIT6;
+    			cnt = 0;
+    		}
+    	}
+    }
+
+    return 0;
+}

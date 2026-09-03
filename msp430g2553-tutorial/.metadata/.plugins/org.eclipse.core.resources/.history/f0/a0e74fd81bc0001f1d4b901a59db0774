@@ -1,0 +1,45 @@
+#include <msp430.h> 
+
+/*
+ * 0. 编程实现让单片机P1.0点亮LED灯，然后使单片机进入LPM3模式。
+ * 1. 编程实现P1.x引脚控制一个LED灯的闪烁，周期为1秒（0.1秒亮，0.9秒灭）。
+ * 2. 编程实现用P1.3点动控制P1.6的LED灯控制。
+ * 3. 设置P1.0、P1.6引脚为按键，P1.2、P1.4为输出，分别控制2个LED灯。P1.0键按住，P1.2的LED灯亮，释放灭；P1.6键按住，P1.4的LED灯灭，释放亮。
+ * 4. 编程实现用P1.6按键点动控制P1.0的LED灯，按下时LED灯按1秒（0.1秒亮，0.9秒灭）周期闪烁，释放时熄灭。
+ * 5. 编程实现利用Timer1主定时器连续模式产生溢出定时中断，定时长度0.1秒。用该中断控制P1.0引脚的LED灯闪烁，0.1秒亮、0.1秒灭。
+ * 6. 编程实现利用Timer1主定时器UP模式，通道0的定时中断，定时长度0.1秒。用该中断控制P1.0引脚的LED灯闪烁，0.1秒亮、0.1秒灭。
+ */
+int t = 65536-32768/10;
+int main(void) {
+    WDTCTL = WDTPW + WDTHOLD;	// Stop watchdog timer
+
+    // P1.0
+    P1DIR |= BIT0;
+//    P1OUT &= ~BIT0;
+
+	// 配置DCO为1MHZ
+//	DCOCTL = CALDCO_1MHZ;
+//    BCSCTL1 = CALBC1_1MHZ;
+
+    // 时钟源为SMCLK
+    TA1CTL |= TASSEL_1;
+    TA1CTL |= MC_2 + TAIE;
+    TA1R = t;
+    _BIS_SR(LPM3_bits + GIE);
+
+	return 0;
+}
+
+// 定时器1中断服务程序
+#pragma vector =TIMER1_A1_VECTOR
+__interrupt void Timer_A(void) {
+	switch(TA1IV) {
+	case 2: break;
+	case 4: break;
+	case 10:
+		P1OUT ^= BIT0;
+		TA1R = t;
+		break;
+	}
+}
+

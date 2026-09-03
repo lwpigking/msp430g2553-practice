@@ -1,0 +1,22 @@
+#include <msp430.h> 
+
+/*
+ * main.c
+ */
+int main(void) {
+    WDTCTL = WDTPW | WDTHOLD;	// Stop watchdog timer
+	// |= 高电平
+    // &= ~ 低电平
+    //  ^= 不断改变
+    P1DIR |= BIT6;
+    // 初始化为低电平
+    P1OUT &= ~BIT6;
+
+    while(1) {
+    	// 异或运算
+    	P1OUT ^= BIT6;
+    	__delay_cycles(500000);
+    }
+
+	return 0;
+}
